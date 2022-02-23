@@ -6,20 +6,19 @@ import 'package:jokes_app/Models/jokes_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() {
+    return _HomeScreenState();
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   ///Var
-  String apiURL = 'https://api.chucknorris.io/jokes/random';
-
-  ///Map
-  Map data;
+  String _URL = 'https://api.chucknorris.io/jokes/random';
 
   ///Method
   Future<JokesModel> fetchData() async {
     JokesModel jokesModel;
-    http.Response response = await http.get(Uri.parse(apiURL));
+    http.Response response = await http.get(Uri.parse(_URL));
     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
     jokesModel = JokesModel.fromJson(jsonResponse);
     return jokesModel;
@@ -38,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final Size s = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jokes Application'),
+        title: Text('Jokes App'),
       ),
       body: Container(
         height: s.height,
@@ -46,10 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
         child: FutureBuilder<JokesModel>(
           future: fetchData(),
           builder: (BuildContext context, AsyncSnapshot<JokesModel> snapshot) {
+            ///Assigned Variable
+            final v = snapshot.data;
+
+            ///Conditions
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
             }
-            final v = snapshot.data;
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: s.height * 0.60,
                   width: s.width,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.grey.withOpacity(0.2),
                   ),
                   child: Center(
                     child: Column(
@@ -89,16 +91,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.2),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Created at : ${v.createdAt}",
+                        style: GoogleFonts.lateef(
+                          textStyle: TextStyle(
+                            fontSize: 20.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
                   alignment: Alignment.centerRight,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.grey.withOpacity(0.2),
                     ),
-                    child: Text(
-                      "Updated at : ${v.updatedAt}",
-                      style: GoogleFonts.lateef(
-                        textStyle: TextStyle(
-                          fontSize: 20.5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Updated at : ${v.updatedAt}",
+                        style: GoogleFonts.lateef(
+                          textStyle: TextStyle(
+                            fontSize: 20.5,
+                          ),
                         ),
                       ),
                     ),
@@ -112,23 +136,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-/*
-                
-                Text('1 ${val.categories}'),
-                
-                Text('2 ${val.createdAt}'),
-                
-                Text('3 ${val.iconUrl}'),
-                
-                Text('4 ${val.id}'),
-                
-                Text('5 ${val.updatedAt}'),
-                
-                Text('6 ${val.url}'),
-                
-                Text('7 ${val.value}'),
-                
-                Image.network(val.iconUrl, height: 100),
-                
-
-*/

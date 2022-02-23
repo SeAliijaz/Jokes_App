@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/Jokes_WorkSpace/home_Screen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,7 +14,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
         primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Colors.lightBlue,
       ),
 
       ///DebugShowCheckedModeBanner
