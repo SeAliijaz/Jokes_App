@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:jokes_app/Constants/constants.dart';
 import 'package:jokes_app/Models/jokes_model.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -81,7 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             IconButton(
-                                onPressed: () {}, icon: Icon(Icons.share)),
+                              onPressed: () {
+                                Share.share("${v.value}").then(
+                                  (value) => showToastMsg(
+                                      'Sharing Text successfully!'),
+                                );
+                              },
+                              icon: Icon(Icons.share),
+                            ),
                             IconButton(
                               onPressed: () {
                                 FlutterClipboard.copy(v.value).then(
