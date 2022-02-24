@@ -1,24 +1,24 @@
 import 'dart:convert';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:jokes_app/Constants/constants.dart';
 import 'package:jokes_app/Models/jokes_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
-  State<HomeScreen> createState() {
-    return _HomeScreenState();
-  }
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   ///Var
-  String _URL = 'https://api.chucknorris.io/jokes/random';
+  String _linkAPI = 'https://api.chucknorris.io/jokes/random';
 
   ///Method
   Future<JokesModel> fetchData() async {
     JokesModel jokesModel;
-    http.Response response = await http.get(Uri.parse(_URL));
+    http.Response response = await http.get(Uri.parse(_linkAPI));
     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
     jokesModel = JokesModel.fromJson(jsonResponse);
     return jokesModel;
@@ -83,7 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             IconButton(
                                 onPressed: () {}, icon: Icon(Icons.share)),
                             IconButton(
-                                onPressed: () {}, icon: Icon(Icons.copy)),
+                              onPressed: () {
+                                FlutterClipboard.copy(v.value).then(
+                                  (value) => showToastMsg(
+                                    "Copied Text Successfully!",
+                                  ),
+                                );
+                              },
+                              icon: Icon(Icons.copy),
+                            ),
                           ],
                         ),
                       ],

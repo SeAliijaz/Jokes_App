@@ -13,4 +13,3 @@ A few resources to get you started if this is your first Flutter project:
 ## Video
 
 https://user-images.githubusercontent.com/89317342/155403996-6fb6a2d6-853b-427d-aee3-2309ccec31d8.mp4
-
