@@ -16,6 +16,5 @@ A few resources to get you started if this is your first Flutter project:
 
 ## Video
 
-
 https://user-images.githubusercontent.com/89317342/155615454-a4cbef29-7a03-40e0-94bc-ee30ea069683.mp4
 

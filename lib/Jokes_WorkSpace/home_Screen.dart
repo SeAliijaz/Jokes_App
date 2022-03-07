@@ -52,100 +52,99 @@ class _HomeScreenState extends State<HomeScreen> {
             ///Conditions
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
-            }
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: s.height * 0.60,
-                  width: s.width,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.2),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${v.value}",
-                            style: GoogleFonts.lateef(
-                              textStyle: TextStyle(
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Divider(),
+                  Expanded(
+                    child: Container(
+                      width: s.width,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "${v.value}",
+                                style: GoogleFonts.lateef(
+                                  textStyle: TextStyle(
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Share.share("${v.value}").then(
-                                  (value) => showToastMsg(
-                                      'Sharing Text successfully!'),
-                                );
-                              },
-                              icon: Icon(Icons.share),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                FlutterClipboard.copy(v.value).then(
-                                  (value) => showToastMsg(
-                                    "Copied Text Successfully!",
-                                  ),
-                                );
-                              },
-                              icon: Icon(Icons.copy),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Share.share("${v.value}").then(
+                                      (value) => showToastMsg(
+                                          'Sharing Text successfully!'),
+                                    );
+                                  },
+                                  icon: Icon(Icons.share),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    FlutterClipboard.copy(v.value).then(
+                                      (value) => showToastMsg(
+                                        "Copied Text Successfully!",
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.copy),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Created at : ${v.createdAt}",
-                        style: GoogleFonts.lateef(
-                          textStyle: TextStyle(
-                            fontSize: 20.5,
+                  Divider(),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Created at : ${v.createdAt}",
+                          style: GoogleFonts.lateef(
+                            textStyle: TextStyle(
+                              fontSize: 20.5,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Updated at : ${v.updatedAt}",
-                        style: GoogleFonts.lateef(
-                          textStyle: TextStyle(
-                            fontSize: 20.5,
+                  Divider(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Updated at : ${v.updatedAt}",
+                          style: GoogleFonts.lateef(
+                            textStyle: TextStyle(
+                              fontSize: 20.5,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
+                  Divider(),
+                ],
+              );
+            }
           },
         ),
       ),
