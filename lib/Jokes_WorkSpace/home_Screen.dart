@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Divider(),
                   Expanded(
                     child: Container(
                       width: s.width,
@@ -66,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Divider(),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
@@ -78,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
+                            Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -102,46 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
+                            Divider(),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  Divider(),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Created at : ${v.createdAt}",
-                          style: GoogleFonts.lateef(
-                            textStyle: TextStyle(
-                              fontSize: 20.5,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Divider(),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Updated at : ${v.updatedAt}",
-                          style: GoogleFonts.lateef(
-                            textStyle: TextStyle(
-                              fontSize: 20.5,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Divider(),
                 ],
               );
             }
